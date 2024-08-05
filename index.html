@@ -5,110 +5,758 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./style.css" />
   <link rel="icon" href="public/assets/favicon.png" />
 
-  <title>30 Days of JavaScript</title>
-  <meta name="title" content="30 Days of JavaScript" />
-  <meta name="description" content=" 30 Days of JavaScript is an open-source collection of JavaScript projects designed
-    to help you master JavaScript through hands-on practice. Perfect for building your skills, one project at a
-    time." />
+  <title>JavaScript Studio - Kanugula Shivashanker</title>
+  <meta name="title" content="JavaScript Studio" />
+  <meta name="description" content="A comprehensive collection of JavaScript projects showcasing development skills and continuous learning progress by Kanugula Shivashanker." />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://30daysofjs.netlify.app/" />
-  <meta property="og:title" content="30 Days of JavaScript" />
-  <meta property="og:description" content=" 30 Days of JavaScript is an open-source collection of JavaScript projects
-    designed to help you master JavaScript through hands-on practice. Perfect for building your skills, one project at a
-    time." />
-  <meta property="og:image" content="" />
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://30daysofjs.netlify.app/" />
-  <meta property="twitter:title" content="30 Days of JavaScript" />
-  <meta property="twitter:description" content=" 30 Days of JavaScript is an open-source collection of JavaScript
-    projects designed to help you master JavaScript through hands-on practice. Perfect for building your skills, one
-    project at a time." />
-  <meta property="twitter:image" content="" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0e1a;
+      color: #e2e8f0;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .header {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #2d3748 100%);
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23334155" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.4;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 14, 26, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link:hover {
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .nav-link-github {
+      background: #1f2937;
+      border: 1px solid #374151;
+      color: #f9fafb;
+    }
+
+    .nav-link-github:hover {
+      background: #374151;
+      border-color: #4b5563;
+      color: #f9fafb;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 10;
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #f1f5f9 0%, #3b82f6 50%, #1e40af 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      color: white;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(71, 85, 105, 0.2);
+      border-color: #64748b;
+    }
+
+    .search-container {
+      margin-top: 2rem;
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      z-index: 10;
+    }
+
+    #search-bar {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      border-radius: 12px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    #search-bar:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    #search-bar::placeholder {
+      color: #64748b;
+    }
+
+    .main {
+      background: #0f172a;
+      position: relative;
+      z-index: 10;
+    }
+
+    .projects-section {
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #f1f5f9;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: #64748b;
+    }
+
+    .project-list-area {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #64748b;
+      padding: 3rem 2rem;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+      border: 1px solid rgba(71, 85, 105, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .project-img-cont {
+      height: 180px;
+      
+      background: linear-gradient(135deg, #1e293b, #475569);
+      border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-img-cont::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+    }
+
+    .project-img-cont::after {
+      content: '{ }';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      color: #3b82f6;
+      font-weight: 700;
+    }
+
+    .project-img-cont img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .project-img-cont:hover img {
+      transform: scale(1.05);
+    }
+
+    .project-detail {
+      padding: 1.5rem;
+    }
+
+    .project-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-content h2 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-content p {
+      color: #94a3b8;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .links a {
+      padding: 0.5rem 1.25rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .links a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      background: #020617;
+      border-top: 1px solid rgba(71, 85, 105, 0.3);
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-text {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .footer-text a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    .footer-text a:hover {
+      color: #60a5fa;
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #3b82f6;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 0 1rem;
+      }
+
+      .hero {
+        padding: 6rem 1rem 3rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .projects-section {
+        padding: 3rem 1rem;
+      }
+
+      .project-list-area {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-right {
+        gap: 1rem;
+      }
+
+      .nav-link {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .project-card {
+        border-radius: 12px;
+      }
+    }
+  </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NCYV025T3D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-
-  gtag('config', 'G-NCYV025T3D');
-</script>
-
 <body>
-  <header id="#">
-    <nav>
-      <section>
-        <a href="#" class="left-side">
-          <div class="brand">
-            <img src="public/assets/favicon.png" />
-          </div>
-          <strong>30 Days of JavaScript</strong>
-        </a>
-        <div class="nav-list">
-          <div class="nav-item">
-            <a href="#projects" class="btn project-nav-link">Projects</a>
-          </div>
-          <div class="nav-item">
-            <a class="btn github-link" target="_blank" href="https://github.com/swapnilsparsh/30DaysOfJavaScript">
-              <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" style="
-                    width: 14px;
-                    height: 14px;
-                    margin-right: 4px;
-                    margin-top: 1px;
-                  " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                <path fill="currentColor"
-                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
-                </path>
-              </svg>
-              Github
-            </a>
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-container">
+        <div class="nav-left">
+          <div class="logo">
+            <div class="logo-icon">JS</div>
+            <span class="logo-text">JavaScript Studio</span>
           </div>
         </div>
-      </section>
+        <div class="nav-right">
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="https://github.com/shivas1432/JavaScript-Studio" target="_blank" class="nav-link nav-link-github">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.545 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.92 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
     </nav>
 
     <section class="hero">
-      <div class="hero-left">
-        <h2>30 Days of JavaScript</h2>
-        <p>
-          30 Days of JavaScript is an open-source collection of JavaScript projects designed to help you master
-          JavaScript through hands-on practice. Perfect for building your skills, one project at a time.
+      <div class="hero-content">
+        <h1 class="hero-title">JavaScript Studio</h1>
+        <p class="hero-description">
+          A comprehensive collection of 126+ JavaScript projects showcasing development skills and continuous learning progress.
+          Built by <strong>Kanugula Shivashanker</strong> - Full-Stack Developer passionate about creating innovative web solutions.
         </p>
 
-        <div class="hero-btns">
-          <a href="#projects">
-            <button class="btn">Explore Projects</button>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Projects</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
           </a>
+          
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="btn btn-secondary">
+            Learn JavaScript
+          </a>
+        </div>
 
-          <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-            <button class="btn active">Learn JS</button>
-          </a>
-          <div>
-            <input type="text" id="search-bar" placeholder="Search" />
+        <div class="search-container">
+          <div class="search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="search-icon">
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" id="search-bar" placeholder="Search projects..." />
           </div>
         </div>
       </div>
     </section>
   </header>
 
-  <section id="projects">
-    <div class="projects-title">
-      <h2>Projects List</h2>
-    </div>
-    <div class="project-list-area"></div>
-  </section>
+  <main class="main">
+    <section id="projects" class="projects-section">
+      <div class="projects-container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="section-subtitle">Interactive JavaScript applications and games</div>
+        </div>
+        <div class="project-list-area"></div>
+      </div>
+    </section>
 
- 
-  <script src="./script.js"></script>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-text">
+          Made with ❤️ by <a href="https://www.linkedin.com/in/shivashanker-kanugula-51a512252" target="_blank">Kanugula Shivashanker</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/shivas1432" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/shivashanker-kanugula-51a512252" target="_blank">LinkedIn</a>
+          <a href="https://www.shivashanker.com" target="_blank">Portfolio</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const projectsArea = document.querySelector(".project-list-area");
+    const searchBar = document.getElementById("search-bar");
+    let allProjects = [];
+
+    function getImagePath(id) {
+      return `public/assets/${id}.png`;
+    }
+
+    function getProjectUrl(name) {
+      return `./projects/${name.toLowerCase().replace(/ /g, '-')}/`;
+    }
+
+    function getGithubUrl(name) {
+      const repoName = name.toLowerCase().replace(/ /g, '-');
+      return `https://github.com/shivas1432/JavaScript-Studio/tree/main/projects/${repoName}`;
+    }
+
+    function getProjectImg(project) {
+      const imgParent = document.createElement("div");
+      imgParent.className = "project-img-cont";
+      
+      const imgElm = document.createElement("img");
+      imgElm.src = project.image;
+      imgElm.setAttribute("alt", project.name);
+      
+      imgElm.onerror = function() {
+        this.style.display = 'none';
+      };
+      
+      imgParent.appendChild(imgElm);
+      return imgParent;
+    }
+
+    function createAnchorElm(href, value, className, attrName, attrValue) {
+      const anchorElm = document.createElement("a");
+      anchorElm.innerText = value;
+      anchorElm.href = href;
+      anchorElm.className = className;
+      anchorElm.setAttribute(attrName, attrValue);
+      
+      return anchorElm;
+    }
+
+    function getProjectLinks(project) {
+      const linkContainer = document.createElement("div");
+      linkContainer.className = "links";
+      
+      const websiteLink = createAnchorElm(project.url, 'Live Demo', "btn", "target", "_blank");
+      const githubLink = createAnchorElm(project.github, 'Source Code', "btn", "target", "_blank");
+      
+      linkContainer.append(websiteLink, githubLink);
+      return linkContainer;
+    }
+
+    function getProjectContent(project) {
+      const contentContainer = document.createElement("div");
+      contentContainer.className = "project-detail";
+      const contentElm = document.createElement("div");
+      contentElm.className = "project-content";
+      
+      const projectName = document.createElement("h2");
+      projectName.innerText = project.name;
+      
+      const projectDescription = document.createElement("p");
+      projectDescription.innerText = project.description;
+      
+      contentElm.append(projectName, projectDescription);
+      contentContainer.appendChild(contentElm);
+      
+      return contentContainer;
+    }
+
+    function renderProjectList(projects) {
+      projectsArea.innerHTML = "";
+      
+      if (projects.length === 0) {
+        const noResultsMessage = document.createElement("div");
+        noResultsMessage.className = "no-results";
+        noResultsMessage.innerHTML = `
+          <div>
+            <h3>No projects found</h3>
+            <p>Try adjusting your search criteria</p>
+          </div>
+        `;
+        projectsArea.appendChild(noResultsMessage);
+        return;
+      }
+        
+      projects.forEach((project) => {
+        const projectCard = document.createElement("div");
+        projectCard.className = "project-card";
+        
+        const projectImg = getProjectImg({
+          ...project,
+          image: getImagePath(project.id),
+        });
+        
+        const projectContent = getProjectContent(project);
+        const projectLinks = getProjectLinks({
+          ...project,
+          url: getProjectUrl(project.name),
+          github: getGithubUrl(project.name),
+        });
+        
+        projectContent.querySelector('.project-content').appendChild(projectLinks);
+        projectCard.append(projectImg, projectContent);
+        
+        projectsArea.appendChild(projectCard);
+      });
+    }
+
+    function filterProjects(query) {
+      const filteredProjects = allProjects.filter(project =>
+        project.name.toLowerCase().includes(query.toLowerCase()) ||
+        project.description.toLowerCase().includes(query.toLowerCase())
+      );
+        
+      renderProjectList(filteredProjects);
+    }
+
+    function fetchProjects() {
+      fetch("./data.json")
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((projects) => {
+          allProjects = projects;
+          renderProjectList(projects);
+          
+          searchBar.addEventListener("input", () => {
+            const query = searchBar.value.trim();
+            if (query) {
+              filterProjects(query);
+            } else {
+              renderProjectList(projects);
+            }
+          });
+        })
+        .catch((err) => {
+          console.error("Error fetching project data:", err);
+          projectsArea.innerHTML = `
+            <div class="no-results">
+              <h3>Error loading projects</h3>
+              <p>Please check if data.json exists and try again</p>
+            </div>
+          `;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchProjects);
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
