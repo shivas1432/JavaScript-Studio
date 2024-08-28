@@ -1,4 +1,4 @@
-# JavaScript Learning Journey
+﻿# JavaScript Learning Journey
 
 A comprehensive collection of JavaScript projects showcasing my development skills and continuous learning progress.
 
@@ -72,14 +72,14 @@ cd javascript-learning-journey
 
 ### Project Structure
 ```
-├── projects/
-│   ├── drum-kit/
-│   ├── calculator/
-│   ├── weather-app/
-│   └── ...
-├── assets/
-├── README.md
-└── index.html
+â”œâ”€â”€ projects/
+â”‚   â”œâ”€â”€ drum-kit/
+â”‚   â”œâ”€â”€ calculator/
+â”‚   â”œâ”€â”€ weather-app/
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ assets/
+â”œâ”€â”€ README.md
+â””â”€â”€ index.html
 ```
 
 ## Learning Path
@@ -117,5 +117,9 @@ This project is licensed under the MIT License - feel free to use these projects
 
 ---
 
-**Made with ❤️ by Kanugula Shivashanker**  
+**Made with â¤ï¸ by Kanugula Shivashanker**  
 *Full-Stack Developer passionate about creating innovative web solutions*
+
+## Recent Updates
+- Enhanced project structure and utilities
+- Added development tools and resources

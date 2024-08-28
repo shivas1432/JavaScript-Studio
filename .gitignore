@@ -5,3 +5,5 @@
 dist/
 build/
 .env
+
+# IDE and editor files
