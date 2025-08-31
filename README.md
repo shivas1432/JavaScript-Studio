@@ -1,4 +1,4 @@
-# JavaScript Projects Hub 🚀
+# JavaScript Projects Hub 
 
 A comprehensive collection of **100+ JavaScript projects** for learning and mastering JavaScript through **practical, hands-on projects**.
 
